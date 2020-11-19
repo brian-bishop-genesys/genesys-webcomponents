@@ -32,7 +32,7 @@ export class GuxRating {
       return;
     }
 
-    const ratingStar = (event.target as HTMLElement).closest('gux-rating-star');
+    const ratingStar = (event.target as HTMLElement).closest('gux-icon');
     const clickedStarIndex = Array.from(this.ratingElement.children).findIndex(
       child => child === ratingStar
     );
@@ -95,12 +95,16 @@ export class GuxRating {
   private getRatingStarElements(): JSX.Element {
     return [...Array(this.maxValue).keys()].reduce((acc, cv) => {
       if (cv + 0.5 === this.value) {
-        return acc.concat(<gux-rating-star fill="half"></gux-rating-star>);
+        return acc.concat(<gux-icon icon-name="ic-bug" decorative></gux-icon>);
       } else if (cv + 1 <= this.value) {
-        return acc.concat(<gux-rating-star fill="full"></gux-rating-star>);
+        return acc.concat(
+          <gux-icon icon-name="ic-stars" decorative></gux-icon>
+        );
       }
 
-      return acc.concat(<gux-rating-star fill="empty"></gux-rating-star>);
+      return acc.concat(
+        <gux-icon icon-name="ic-star-outline" decorative></gux-icon>
+      );
     }, []);
   }
 
